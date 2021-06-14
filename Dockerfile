@@ -20,7 +20,7 @@ RUN touch /etc/cron.d/website-monitoring-cron /var/log/cron.log && \
     echo "  echo > /etc/cron.d/website-monitoring-cron" >> change_cron.sh && \
     echo "  echo "$CRON_EXPRESSION python3 /usr/local/bin/send_alert.py" > /etc/cron.d/website-monitoring-cron" >> change_cron.sh && \
     echo "  echo "#Empty line." >> /etc/cron.d/website-monitoring-cron" >> change_cron.sh && \
-    echo "  ./supercronic /etc/cron.d/website-monitoring-cron" >> change_cron.sh && \
+    # echo "  ./supercronic /etc/cron.d/website-monitoring-cron" >> change_cron.sh && \
     echo "fi" >> change_cron.sh && \
     bash change_cron.sh
 
