@@ -27,6 +27,6 @@ COPY ./monitor-websites.py .
 
 RUN chmod +x monitor-websites.py
 
-VOLUME ["/etc/cron.d/]
+VOLUME ["/etc/cron.d/"]
 
 CMD ["supercronic", "/etc/cron.d/custom-cron"]
