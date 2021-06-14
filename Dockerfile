@@ -23,7 +23,7 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone &
 RUN touch change_cron.sh 
 RUN chmod +x change_cron.sh
 RUN echo "#!/bin/bash" >> change_cron.sh
-RUN echo "if [[ ! -z "$CRON_EXPRESSION" ]]; then" >> change_cron.sh 
+RUN echo "if [ ! -z \"\${CRON_EXPRESSION}\" ]; then" >> change_cron.sh 
 RUN echo "  echo > /etc/cron.d/website-monitoring-cron" >> change_cron.sh 
 RUN echo "  echo \"""${CRON_EXPRESSION}" python3 /usr/local/bin/send_alert.py"\" > /etc/cron.d/website-monitoring-cron" >> change_cron.sh
 RUN echo "  echo "#Empty line." >> /etc/cron.d/website-monitoring-cron" >> change_cron.sh 
