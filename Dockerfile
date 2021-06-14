@@ -20,4 +20,5 @@ COPY ./send_alert.py .
 
 RUN chmod +x send_alert.py
 
-CMD tail -f /dev/null
+CMD ["sh", "-c", "cron", "-f"]
+# CMD tail -f /dev/null
