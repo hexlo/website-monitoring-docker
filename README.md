@@ -15,5 +15,5 @@ You need to provide these environment variables:
 | `EMAIL_PASSWORD` | Your email passwordused. It is recommended to generate an app password from your gmail account. | `EMAIL_PASSWORD=password` |
 | `URLS` | URLs to be monitored. They are delimited by a comma. | `URLS=website.com,b.org,https://c.io` |
 | `TZ` | Timezone. [Here is a list of possible values](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones "Wikipedia's list of timezones"). | `TZ=America/Toronto` |
-| `CRONEX` | Cron expression. Default is "0 * * * *" (executes every hour). See cron expression [documentation](https://docs.oracle.com/cd/E12058_01/doc/doc.1014/e12030/cron_expressions.htm), or a cron expression [generator](https://crontab.cronhub.io/). | `CRONEX="0 */4 * * *"` |
+| `CRON_EXPRESSION` | Cron expression. Default is "0 * * * *" (executes every hour). See cron expression [documentation](https://docs.oracle.com/cd/E12058_01/doc/doc.1014/e12030/cron_expressions.htm), or a cron expression [generator](https://crontab.cronhub.io/). | `CRONEX="0 */4 * * *"` |
 
