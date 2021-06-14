@@ -8,11 +8,15 @@ ENV SUPERCRONIC_URL=https://github.com/aptible/supercronic/releases/download/v0.
     SUPERCRONIC=supercronic-linux-amd64 \
     SUPERCRONIC_SHA1SUM=048b95b48b708983effb2e5c935a1ef8483d9e3e
 
-RUN touch /etc/cron.d/website-monitoring-cron /var/log/cron.log && \
+RUN apt-get update && apt-get -y install cron tzdata
+
+RUN pip install requests
+
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone && \
+    touch /etc/cron.d/website-monitoring-cron /var/log/cron.log && \
     chmod 0644 /etc/cron.d/website-monitoring-cron && \
     echo "0 * * * * python3 /usr/local/bin/send_alert.py >> /var/log/cron.log 2>&1" > /etc/cron.d/website-monitoring-cron && \
     echo "# Empty line." >> /etc/cron.d/website-monitoring-cron && \
-    ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone && \
     touch change_cron.sh && \
     chmod +x change_cron.sh && \
     echo "#!/bin/bash" >> change_cron.sh && \
@@ -24,23 +28,11 @@ RUN touch /etc/cron.d/website-monitoring-cron /var/log/cron.log && \
     echo "fi" >> change_cron.sh && \
     bash change_cron.sh
 
-
 RUN curl -fsSLO "$SUPERCRONIC_URL" \
  && echo "${SUPERCRONIC_SHA1SUM}  ${SUPERCRONIC}" | sha1sum -c - \
  && chmod +x "$SUPERCRONIC" \
  && mv "$SUPERCRONIC" "/usr/local/bin/${SUPERCRONIC}" \
  && ln -s "/usr/local/bin/${SUPERCRONIC}" /usr/local/bin/supercronic
-
-RUN apt-get update && apt-get -y install cron tzdata
-
-RUN pip install requests
-
-
-
-
-
-
-
 
 WORKDIR /usr/local/bin
 
