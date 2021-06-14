@@ -28,7 +28,7 @@ services:
       - TZ=America/Toronto
       - EMAIL_ADDRESS=$EMAIL_ADDRESS
       - EMAIL_PASSWORD=$EMAIL_PASSWORD
-      # URLS are delimited by a comma i.e a.com,b.net,https://c.io
+      # URLS are delimited by a comma i.e http://a.com,https://b.net,https://c.io
       - URLS=$URLS
     volumes:
       - ./custom-cron:/ect/cron.d/
