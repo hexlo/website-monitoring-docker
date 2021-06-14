@@ -20,20 +20,17 @@ def main():
 
     # Function to send the message via our own SMTP server.
     def sendAlert(message):
-        print("entered sendAlert()")
         server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
         server.login(emailAddress, password)
         server.send_message(message)
         server.quit()
 
     for url in urls:
-        print("entering for loop: " + url)
+        print(url)
         try:
             r = requests.get(url)
-            print(r)
             print(r.status_code)
             if (r.status_code != 200):
-                print("sending email.")
                 msg = EmailMessage()
                 msg['From'] = emailAddress
                 msg['To'] = emailAddress
