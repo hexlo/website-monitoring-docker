@@ -12,8 +12,6 @@ RUN apt-get update && apt-get -y install cron tzdata
 
 RUN pip install requests
 
-WORKDIR /usr/local/bin
-
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone && \
     touch /etc/cron.d/website-monitoring-cron /var/log/cron.log && \
     chmod 0644 /etc/cron.d/website-monitoring-cron && \
@@ -36,6 +34,8 @@ RUN curl -fsSLO "$SUPERCRONIC_URL" \
  && chmod +x "$SUPERCRONIC" \
  && mv "$SUPERCRONIC" "/usr/local/bin/${SUPERCRONIC}" \
  && ln -s "/usr/local/bin/${SUPERCRONIC}" /usr/local/bin/supercronic
+
+WORKDIR /usr/local/bin
 
 COPY ./send_alert.py .
 
