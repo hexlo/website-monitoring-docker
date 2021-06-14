@@ -2,7 +2,7 @@ FROM python:3.9.5
 
 RUN apt-get update && apt-get -y install cron
 
-RUN pip install requests os smtplib email.message
+RUN pip install requests
 
 RUN touch /etc/cron.d/website-monitoring-cron /var/log/cron.log && \
     chmod 0644 /etc/cron.d/website-monitoring-cron && \
