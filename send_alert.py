@@ -32,9 +32,8 @@ def sendAlert(message):
 for url in urls:
     r = requests.get(url)
     if (r.status_code != 200):
-
         msg.set_content('Your webserver: ' + url + ' might be down.')
-        msg['Subject'] = '[web-monitoring]: ' + url'
+        msg['Subject'] = '[web-monitoring]: ' + url
 
         if __name__ == '__main__':
             sendAlert(msg)
