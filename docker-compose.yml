@@ -1,11 +1,11 @@
 version: '3.6'
 services:
   web-monitor:
-    image: ghcr.io/iceoid/website-monitoring
+    image: ghcr.io/iceoid/website-monitoring-docker
     container_name: web-monitor
     restart: unless-stopped
     environment:
-      - EMAIL_ADDRESS=
-      - EMAIL_PASSWORD=
+      - EMAIL_ADDRESS=$EMAIL_ADDRESS
+      - EMAIL_PASSWORD=$EMAIL_PASSWORD
       # URLS are delimited by a comma i.e a.com,b.net,https://c.io
-      - URLS=
+      - URLS=$URLS
