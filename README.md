@@ -4,7 +4,7 @@ Simple docker container that checks availability of websites.
 
 Using gmail smtp server for email notifications. (For now, only gmail accounts are supported.)
 
-The container will check the websites every 4hrs. This is something that could be set dynamically in the future.
+The container will check the websites every hour by default. You can overwrite this behavior with the environment variable CRONEX (see below).
 
 You need to provide these environment variables:
 
