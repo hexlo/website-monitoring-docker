@@ -39,5 +39,5 @@ services:
       - URLS=$URLS
       - TZ=America/Toronto
     volumes:
-      - ./custom-cron:/ect/cron.d/
+      - ./scripts/custom-cron:/ect/cron.d/
 ```
