@@ -37,5 +37,5 @@ services:
       # URLS are delimited by a comma i.e http://a.com,https://b.net,https://c.io
       - URLS=$URLS
     volumes:
-      - ./custom-cron:/ect/cron.d/
+      - ./scripts/custom-cron:/ect/cron.d/
 ```
