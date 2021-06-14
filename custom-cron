@@ -1,2 +1,2 @@
-*/5 * * * * python3 monitor-websites.py
+0 * * * * python3 monitor-websites.py
 # Empty line.
