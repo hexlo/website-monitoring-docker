@@ -30,7 +30,7 @@ def main():
         try:
             r = requests.get(url)
             print(r.status_code)
-            if (r.status_code != 200):
+            if not r.status_code in {200, 301, 302, 308}:
                 msg = EmailMessage()
                 msg['From'] = emailAddress
                 msg['To'] = emailAddress
