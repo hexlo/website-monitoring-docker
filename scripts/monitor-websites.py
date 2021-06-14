@@ -63,8 +63,14 @@ def main():
     if smtp_port is None:
         smtp_port = 465
 
+    email_list = os.getenv('EMAIL_LIST').split(',')
+    if email_list is None:
+        email_list = email_address
+    # else:
+    #     to = ", ".join(email_list)
+
     for url in fixed_urls:
-        message = create_msg(url, email_address)
+        message = create_msg(url, email_address, email_list)
         if message is not None:
             send_alert(message, email_address, password, smtp, smtp_port)
 
