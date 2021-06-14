@@ -2,8 +2,6 @@ FROM python:3.9.5
 
 ENV TZ=America/Toronto
 
-ENV CRON_EXPRESSION=""
-
 ENV SUPERCRONIC_URL=https://github.com/aptible/supercronic/releases/download/v0.1.12/supercronic-linux-amd64 \
     SUPERCRONIC=supercronic-linux-amd64 \
     SUPERCRONIC_SHA1SUM=048b95b48b708983effb2e5c935a1ef8483d9e3e
@@ -13,26 +11,7 @@ RUN apt-get update && apt-get -y install cron tzdata
 RUN pip install requests
 
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone && \
-    touch /etc/cron.d/website-monitoring-cron /var/log/cron.log && \
-    chmod 0644 /etc/cron.d/website-monitoring-cron && \
-    echo "0 * * * * python3 /usr/local/bin/send_alert.py >> /var/log/cron.log 2>&1" > /etc/cron.d/website-monitoring-cron && \
-    echo "# Empty line." >> /etc/cron.d/website-monitoring-cron
-
-COPY ./change_cron.sh /usr/local/bin
-
-RUN chmod +x /usr/local/bin/change_cron.sh
-
-RUN bash change_cron.sh
-# RUN touch change_cron.sh 
-# RUN chmod +x change_cron.sh
-# RUN echo "#!/bin/bash" >> change_cron.sh
-# RUN echo "if [ ! -z \"\${CRON_EXPRESSION}\" ]; then" >> change_cron.sh 
-# RUN echo "  echo > /etc/cron.d/website-monitoring-cron" >> change_cron.sh 
-# RUN echo "  echo \"""${CRON_EXPRESSION}" python3 /usr/local/bin/send_alert.py"\" > /etc/cron.d/website-monitoring-cron" >> change_cron.sh
-# RUN echo "  echo "#Empty line." >> /etc/cron.d/website-monitoring-cron" >> change_cron.sh 
-#  # echo "  ./supercronic /etc/cron.d/website-monitoring-cron" >> change_cron.sh && \
-# RUN echo "fi" >> change_cron.sh 
-# RUN bash change_cron.sh
+    touch /var/log/cron.log
 
 RUN curl -fsSLO "$SUPERCRONIC_URL" \
  && echo "${SUPERCRONIC_SHA1SUM}  ${SUPERCRONIC}" | sha1sum -c - \
@@ -42,9 +21,12 @@ RUN curl -fsSLO "$SUPERCRONIC_URL" \
 
 WORKDIR /usr/local/bin
 
-COPY ./send_alert.py .
+COPY ./custom-cron /etc/cron.d/
 
-RUN chmod +x send_alert.py
+COPY ./monitor-websites.py .
 
-CMD ["supercronic", "/etc/cron.d/website-monitoring-cron"]
-# CMD tail -f /dev/null
+RUN chmod +x monitor-websites.py
+
+VOLUME ["/etc/cron.d/]
+
+CMD ["supercronic", "/etc/cron.d/custom-cron"]

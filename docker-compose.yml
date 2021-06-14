@@ -10,4 +10,5 @@ services:
       - EMAIL_PASSWORD=$EMAIL_PASSWORD
       # URLS are delimited by a comma i.e a.com,b.net,https://c.io
       - URLS=$URLS
-      - CRON_EXPRESSION="*/5 * * * *"
+    volumes:
+      - ./custom-cron:/ect/cron.d
