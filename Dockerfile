@@ -18,16 +18,21 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone &
     echo "0 * * * * python3 /usr/local/bin/send_alert.py >> /var/log/cron.log 2>&1" > /etc/cron.d/website-monitoring-cron && \
     echo "# Empty line." >> /etc/cron.d/website-monitoring-cron
 
-RUN touch change_cron.sh 
-RUN chmod +x change_cron.sh
-RUN echo "#!/bin/bash" >> change_cron.sh
-RUN echo "if [ ! -z \"\${CRON_EXPRESSION}\" ]; then" >> change_cron.sh 
-RUN echo "  echo > /etc/cron.d/website-monitoring-cron" >> change_cron.sh 
-RUN echo "  echo \"""${CRON_EXPRESSION}" python3 /usr/local/bin/send_alert.py"\" > /etc/cron.d/website-monitoring-cron" >> change_cron.sh
-RUN echo "  echo "#Empty line." >> /etc/cron.d/website-monitoring-cron" >> change_cron.sh 
- # echo "  ./supercronic /etc/cron.d/website-monitoring-cron" >> change_cron.sh && \
-RUN echo "fi" >> change_cron.sh 
+COPY ./change_cron.sh /usr/local/bin
+
+RUN chmod +x /usr/local/bin/change_cron.sh
+
 RUN bash change_cron.sh
+# RUN touch change_cron.sh 
+# RUN chmod +x change_cron.sh
+# RUN echo "#!/bin/bash" >> change_cron.sh
+# RUN echo "if [ ! -z \"\${CRON_EXPRESSION}\" ]; then" >> change_cron.sh 
+# RUN echo "  echo > /etc/cron.d/website-monitoring-cron" >> change_cron.sh 
+# RUN echo "  echo \"""${CRON_EXPRESSION}" python3 /usr/local/bin/send_alert.py"\" > /etc/cron.d/website-monitoring-cron" >> change_cron.sh
+# RUN echo "  echo "#Empty line." >> /etc/cron.d/website-monitoring-cron" >> change_cron.sh 
+#  # echo "  ./supercronic /etc/cron.d/website-monitoring-cron" >> change_cron.sh && \
+# RUN echo "fi" >> change_cron.sh 
+# RUN bash change_cron.sh
 
 RUN curl -fsSLO "$SUPERCRONIC_URL" \
  && echo "${SUPERCRONIC_SHA1SUM}  ${SUPERCRONIC}" | sha1sum -c - \
