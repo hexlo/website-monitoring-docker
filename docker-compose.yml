@@ -5,6 +5,7 @@ services:
     container_name: web-monitor
     restart: unless-stopped
     environment:
+      - TZ=America/Toronto
       - EMAIL_ADDRESS=$EMAIL_ADDRESS
       - EMAIL_PASSWORD=$EMAIL_PASSWORD
       # URLS are delimited by a comma i.e a.com,b.net,https://c.io
