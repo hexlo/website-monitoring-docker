@@ -2,7 +2,7 @@ FROM python:3.9.5
 
 ENV TZ=America/Toronto
 
-ENV CRONEX="0 * * * *"
+ENV CRON_EXPRESSION="0 * * * *"
 
 ENV SUPERCRONIC_URL=https://github.com/aptible/supercronic/releases/download/v0.1.12/supercronic-linux-amd64 \
     SUPERCRONIC=supercronic-linux-amd64 \
@@ -20,7 +20,7 @@ RUN pip install requests
 
 RUN touch /etc/cron.d/website-monitoring-cron /var/log/cron.log && \
     chmod 0644 /etc/cron.d/website-monitoring-cron && \
-    echo "${CRONEX} python3 /usr/local/bin/send_alert.py >> /var/log/cron.log 2>&1" > /etc/cron.d/website-monitoring-cron && \
+    echo "${CRON_EXPRESSION} python3 /usr/local/bin/send_alert.py >> /var/log/cron.log 2>&1" > /etc/cron.d/website-monitoring-cron && \
     echo "# Empty line." >> /etc/cron.d/website-monitoring-cron && \
 #    crontab /etc/cron.d/website-monitoring-cron && \
     ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
