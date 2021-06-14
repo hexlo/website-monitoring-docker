@@ -9,12 +9,14 @@
 - You need to provide these environment variables:
 
 ### environment variables (case-sensitive!):
-| Env variable | Description | Example |
-| :------------- | :----------: | :----------- |
-| `EMAIL_ADDRESS` | The email used to send the alert from and to. | `EMAIL_ADDRESS=youremail@gmail.com` |
-| `EMAIL_PASSWORD` | Your email passwordused. It is recommended to generate an app password from your gmail account. | `EMAIL_PASSWORD=password` |
-| `URLS` | URLs to be monitored. They are delimited by a comma. | `URLS=website.com,b.org,https://c.io` |
-| `TZ` | Timezone. [Here is a list of possible values](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones "Wikipedia's list of timezones"). | `TZ=America/Toronto` |
+| Env variable | Description | Default | Example |
+| :------------- | :----------: | :----------- | :----------- |
+| `EMAIL_ADDRESS` *required* | The email used to send the alert from and to. | _none_ | `EMAIL_ADDRESS=youremail@gmail.com` |
+| `EMAIL_PASSWORD` *required* | Your email passwordused. It is recommended to generate an app password from your gmail account. | _none_ | `EMAIL_PASSWORD=password` |
+| `URLS` *required* | URLs to be monitored. They are delimited by a comma. | _none_ | `URLS=website.com,b.org,https://c.io` |
+| `SMTP_SERVER` (_optional_) | smtp server address | `smtp.gmail.com` | `SMTP_SERVER=smtp.mail.yahoo.com` |
+| `SMTP_PORT` (_optional_) | smtp port to be used. (25, SSL: 465, TLS: 587) | `465` | `SMTP_PORT=587` |
+| `TZ` (_optional_) | Timezone. [Here is a list of possible values](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones "Wikipedia's list of timezones"). | `America/Toronto` | `TZ=America/Toronto` |
 
 ### `custom-cron` example (just modify the cron expression)
 ```
@@ -31,11 +33,11 @@ services:
     container_name: web-monitor
     restart: unless-stopped
     environment:
-      - TZ=America/Toronto
       - EMAIL_ADDRESS=$EMAIL_ADDRESS
       - EMAIL_PASSWORD=$EMAIL_PASSWORD
-      # URLS are delimited by a comma i.e http://a.com,https://b.net,https://c.io
+      # URLS are delimited by a comma i.e a.com,http://b.net,https://c.io
       - URLS=$URLS
+      - TZ=America/Toronto
     volumes:
       - ./custom-cron:/ect/cron.d/
 ```
