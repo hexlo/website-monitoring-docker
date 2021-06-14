@@ -13,4 +13,6 @@ WORKDIR /usr/local/bin
 
 COPY ./send_alert.py .
 
+RUN chmod +x send_alert.py
+
 CMD ["send_alert.py"]
