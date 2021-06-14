@@ -21,9 +21,9 @@ RUN curl -fsSLO "$SUPERCRONIC_URL" \
 
 WORKDIR /usr/local/bin
 
-COPY ./custom-cron /etc/cron.d/
+COPY ./scripts/custom-cron /etc/cron.d/
 
-COPY ./monitor-websites.py .
+COPY ./scripts/monitor-websites.py .
 
 RUN chmod +x monitor-websites.py
 
