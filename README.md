@@ -15,7 +15,6 @@ You need to provide these environment variables:
 | `EMAIL_PASSWORD` | Your email passwordused. It is recommended to generate an app password from your gmail account. | `EMAIL_PASSWORD=password` |
 | `URLS` | URLs to be monitored. They are delimited by a comma. | `URLS=website.com,b.org,https://c.io` |
 | `TZ` | Timezone. [Here is a list of possible values](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones "Wikipedia's list of timezones"). | `TZ=America/Toronto` |
-| `CRON_EXPRESSION` | Cron expression. Default is "0 * * * *" (executes every hour).  | `CRON_EXPRESSION="0 */4 * * *"` |
 
 docker-compose.yml example (this uses a .env file to store the env variables):
 ```
