@@ -2,7 +2,7 @@ FROM python:3.9.5
 
 ENV TZ=America/Toronto
 
-ARG CRON_EXPRESSION
+ENV CRON_EXPRESSION=""
 
 ENV SUPERCRONIC_URL=https://github.com/aptible/supercronic/releases/download/v0.1.12/supercronic-linux-amd64 \
     SUPERCRONIC=supercronic-linux-amd64 \
