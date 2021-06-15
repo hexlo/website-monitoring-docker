@@ -6,7 +6,7 @@ ENV SUPERCRONIC_URL=https://github.com/aptible/supercronic/releases/download/v0.
     SUPERCRONIC=supercronic-linux-amd64 \
     SUPERCRONIC_SHA1SUM=048b95b48b708983effb2e5c935a1ef8483d9e3e
 
-RUN apt-get update && apt-get -y install cron tzdata
+RUN apt-get update && apt-get -y install cron tzdata curl
 
 RUN pip install requests
 
