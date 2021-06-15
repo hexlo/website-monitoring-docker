@@ -46,7 +46,13 @@ def send_alert(message, email, passwd, smtp_server="smtp.gmail.com", port=465):
 
 def main():
 
-    urls = os.getenv('URLS').split(',')
+    urls_env_var = os.getenv('URLS')
+    if urls_env_var:
+        urls = urls_env_var.split(',')
+    else:
+        print("No URLs provided. Exiting")
+        return 1
+    
     fixed_urls = fix_URLS(urls)
 
     email_address = os.getenv('EMAIL_ADDRESS')
@@ -63,11 +69,12 @@ def main():
     if smtp_port is None:
         smtp_port = 465
 
-    email_list = os.getenv('EMAIL_LIST').split(',')
-    if email_list is None:
+    
+    email_list_env_var = os.getenv('EMAIL_LIST')
+    if email_list_env_var:
+        email_list = email_list_env_var.split(',')
+    else:
         email_list = email_address
-    # else:
-    #     to = ", ".join(email_list)
 
     for url in fixed_urls:
         message = create_msg(url, email_address, email_list)
