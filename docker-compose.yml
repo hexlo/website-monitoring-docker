@@ -13,4 +13,4 @@ services:
     volumes:
       - type: bind
         source: ./scripts/custom-cron
-        target: /etc/cron.d/
+        target: /etc/cron.d/custom-cron
