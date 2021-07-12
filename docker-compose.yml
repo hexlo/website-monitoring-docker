@@ -11,4 +11,6 @@ services:
       # URLS are delimited by a comma i.e a.com,b.net,https://c.io
       - URLS=$URLS
     volumes:
-      - ./scripts/custom-cron:/ect/cron.d/
+      - type: bind
+        source: ./scripts/custom-cron
+        target: /etc/cron.d/
