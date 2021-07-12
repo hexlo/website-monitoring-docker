@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo "### Install script for Website-monitoring ###"
+echo ""
 read -rp "Would you like initialise the sensitive files? [y/N] " initResponse
 if [[ "${initResponse}" =~ ^([yY]|[yY][eE][sS])$ ]]; then
     touch .env
@@ -14,3 +16,5 @@ if [[ "${initResponse}" =~ ^([yY]|[yY][eE][sS])$ ]]; then
     read -rp "Enter comma-delimited URLS. (i.e: https://a.com,b.net,http://c.org)" urls
     echo "URLS=${urls}" >> .env
 fi
+echo "Done!"
+echo ""
