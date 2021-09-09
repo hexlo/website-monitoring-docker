@@ -1,3 +1,11 @@
+```
+  _____               _     _ 
+  \_   \___ ___  ___ (_) __| |
+   / /\/ __/ _ \/ _ \| |/ _` |
+/\/ /_| (_|  __/ (_) | | (_| |
+\____/ \___\___|\___/|_|\__,_|
+                              
+```
 # website-monitoring-docker
 
 ### Simple docker container that checks availability of websites.
