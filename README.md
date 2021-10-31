@@ -6,6 +6,7 @@
 \____/ \___\___|\___/|_|\__,_|
                               
 ```
+.
 # website-monitoring-docker
 
 ### Simple docker container that checks availability of websites.
